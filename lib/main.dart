@@ -1,9 +1,11 @@
+import 'package:appwriteapp/core/presentation/routes.dart';
 import 'package:appwriteapp/features/auth/presentation/pages/signup.dart';
 import 'package:appwriteapp/features/general/presentation/pages/home.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'core/presentation/notifiers/providers.dart';
+import 'features/auth/presentation/notifiers/auth_state.dart';
 import 'features/auth/presentation/pages/login.dart';
 
 void main() {
@@ -34,7 +36,12 @@ class MyApp extends StatelessWidget {
             ),
           ),
         ),
-        home: LoginPage(),
+        home: Consumer<AuthState>(
+          builder: (context, state, child) {
+            return state.isLoggedIn ? HomePage() : LoginPage();
+          },
+        ),
+        //onGenerateRoute: AppRoutes.onGenerateRoute,
       ),
     );
   }

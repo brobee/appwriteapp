@@ -1,3 +1,4 @@
+import 'package:appwriteapp/core/presentation/routes.dart';
 import 'package:appwriteapp/features/auth/presentation/notifiers/auth_state.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -55,6 +56,15 @@ class _LoginPageState extends State<LoginPage> {
                 AuthState state =
                     Provider.of<AuthState>(context, listen: false);
                 state.login(_email.text, _password.text);
+              },
+            ),
+            SizedBox(
+              height: 20.0,
+            ),
+            OutlineButton(
+              child: Text('Create account'),
+              onPressed: () {
+                Navigator.pushNamed(context, AppRoutes.signup);
               },
             ),
           ],

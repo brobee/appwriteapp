@@ -1,4 +1,6 @@
+import 'package:appwriteapp/features/auth/presentation/notifiers/auth_state.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SignupPage extends StatefulWidget {
   @override
@@ -6,6 +8,9 @@ class SignupPage extends StatefulWidget {
 }
 
 class _SignupPageState extends State<SignupPage> {
+  TextEditingController _name = TextEditingController();
+  TextEditingController _email = TextEditingController();
+  TextEditingController _password = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,18 +30,21 @@ class _SignupPageState extends State<SignupPage> {
               height: 20.0,
             ),
             TextField(
+              controller: _name,
               decoration: InputDecoration(hintText: "Name"),
             ),
             SizedBox(
               height: 20.0,
             ),
             TextField(
+              controller: _email,
               decoration: InputDecoration(hintText: "Email"),
             ),
             SizedBox(
               height: 10,
             ),
             TextField(
+              controller: _password,
               obscureText: true,
               decoration: InputDecoration(
                 hintText: "Password",
@@ -51,7 +59,10 @@ class _SignupPageState extends State<SignupPage> {
                 'Login',
                 style: TextStyle(fontSize: 22.0),
               ),
-              onPressed: () {},
+              onPressed: () {
+                AuthState state = Provider.of(context, listen: false);
+                state.signUp(_name.text, _email.text, _password.text);
+              },
             ),
           ],
         ),
